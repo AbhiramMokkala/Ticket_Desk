@@ -1,0 +1,143 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: ticketdesk-postgres
+    restart: always
+    environment:
+      POSTGRES_DB: ticketdesk_db
+      POSTGRES_USER: ticketdesk_user
+      POSTGRES_PASSWORD: ticketdesk_secure_password_2026
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ticketdesk_user -d ticketdesk_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - ticketdesk-network
+
+  java-ticket-service:
+    build:
+      context: ./backend/java-ticket-service
+      dockerfile: Dockerfile
+    container_name: ticketdesk-java-service
+    restart: always
+    environment:
+      SPRING_PROFILES_ACTIVE: local
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/ticketdesk_db
+      SPRING_DATASOURCE_USERNAME: ticketdesk_user
+      SPRING_DATASOURCE_PASSWORD: ticketdesk_secure_password_2026
+      JWT_SECRET: TicketDeskJwtSecretKeyForVirtusaPOC2026SecureStringMustBe256BitsLong!
+      JWT_EXPIRATION_HOURS: 24
+      INTERNAL_SERVICE_KEY: TicketDeskInternalServiceAuthSecret2026!
+      DEMO_DATA_SEED: "true"
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 25s
+    networks:
+      - ticketdesk-network
+
+  dotnet-comment-service:
+    build:
+      context: ./backend/dotnet-comment-service
+      dockerfile: Dockerfile
+    container_name: ticketdesk-dotnet-service
+    restart: always
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ConnectionStrings__DefaultConnection: "Host=postgres;Port=5432;Database=ticketdesk_db;Username=ticketdesk_user;Password=ticketdesk_secure_password_2026"
+      Jwt__Secret: "TicketDeskJwtSecretKeyForVirtusaPOC2026SecureStringMustBe256BitsLong!"
+      Jwt__Issuer: "ticketdesk-auth-service"
+      Jwt__Audience: "ticketdesk-platform"
+      InternalAuth__SecretKey: "TicketDeskInternalServiceAuthSecret2026!"
+      Services__JavaServiceUrl: "http://java-ticket-service:8080"
+    ports:
+      - "8081:8081"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      java-ticket-service:
+        condition: service_started
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8081/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+    networks:
+      - ticketdesk-network
+
+  python-attachment-service:
+    build:
+      context: ./backend/python-attachment-service
+      dockerfile: Dockerfile
+    container_name: ticketdesk-python-service
+    restart: always
+    environment:
+      ENVIRONMENT: development
+      DATABASE_URL: "postgresql://ticketdesk_user:ticketdesk_secure_password_2026@postgres:5432/ticketdesk_db"
+      JWT_SECRET: "TicketDeskJwtSecretKeyForVirtusaPOC2026SecureStringMustBe256BitsLong!"
+      JWT_ISSUER: "ticketdesk-auth-service"
+      JWT_AUDIENCE: "ticketdesk-platform"
+      INTERNAL_SERVICE_KEY: "TicketDeskInternalServiceAuthSecret2026!"
+      JAVA_SERVICE_URL: "http://java-ticket-service:8080"
+      STORAGE_PROVIDER: "local"
+      LOCAL_STORAGE_DIR: "/data/attachments"
+      AWS_REGION: "us-east-1"
+      S3_BUCKET_NAME: "ticketdesk-poc-attachments"
+    ports:
+      - "8082:8082"
+    volumes:
+      - attachment_storage:/data/attachments
+    depends_on:
+      postgres:
+        condition: service_healthy
+      java-ticket-service:
+        condition: service_started
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8082/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    networks:
+      - ticketdesk-network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: ticketdesk-frontend
+    restart: always
+    ports:
+      - "80:80"
+    depends_on:
+      - java-ticket-service
+      - dotnet-comment-service
+      - python-attachment-service
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    networks:
+      - ticketdesk-network
+
+volumes:
+  postgres_data:
+  attachment_storage:
+
+networks:
+  ticketdesk-network:
+    driver: bridge

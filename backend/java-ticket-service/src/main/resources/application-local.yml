@@ -1,0 +1,6 @@
+spring:
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/ticketdesk_db}
+    username: ${SPRING_DATASOURCE_USERNAME:ticketdesk_user}
+    password: ${SPRING_DATASOURCE_PASSWORD:ticketdesk_secure_password_2026}
+    driver-class-name: org.postgresql.Driver

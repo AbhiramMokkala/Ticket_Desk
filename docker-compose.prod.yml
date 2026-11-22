@@ -1,0 +1,114 @@
+# Production Docker Compose for Amazon EC2
+# Note: Connects to AWS RDS PostgreSQL - DOES NOT start a local PostgreSQL container.
+# Storage uses Amazon S3 with IAM instance profile (no AWS keys in env).
+
+services:
+  java-ticket-service:
+    build:
+      context: ./backend/java-ticket-service
+      dockerfile: Dockerfile
+    container_name: ticketdesk-java-service
+    restart: always
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      SPRING_DATASOURCE_URL: ${RDS_JDBC_URL}
+      SPRING_DATASOURCE_USERNAME: ${RDS_USERNAME}
+      SPRING_DATASOURCE_PASSWORD: ${RDS_PASSWORD}
+      SPRING_FLYWAY_BASELINE_ON_MIGRATE: "true"
+      SPRING_FLYWAY_BASELINE_VERSION: "0"
+      JWT_SECRET: ${JWT_SECRET}
+      JWT_EXPIRATION_HOURS: 24
+      INTERNAL_SERVICE_KEY: ${INTERNAL_SERVICE_KEY}
+      DEMO_DATA_SEED: ${DEMO_DATA_SEED:-true}
+    expose:
+      - "8080"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    networks:
+      - ticketdesk-prod-network
+
+  dotnet-comment-service:
+    build:
+      context: ./backend/dotnet-comment-service
+      dockerfile: Dockerfile
+    container_name: ticketdesk-dotnet-service
+    restart: always
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      ConnectionStrings__DefaultConnection: ${RDS_DOTNET_CONNECTION_STRING}
+      Jwt__Secret: ${JWT_SECRET}
+      Jwt__Issuer: "ticketdesk-auth-service"
+      Jwt__Audience: "ticketdesk-platform"
+      InternalAuth__SecretKey: ${INTERNAL_SERVICE_KEY}
+      Services__JavaServiceUrl: "http://java-ticket-service:8080"
+    expose:
+      - "8081"
+    depends_on:
+      - java-ticket-service
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8081/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+    networks:
+      - ticketdesk-prod-network
+
+  python-attachment-service:
+    build:
+      context: ./backend/python-attachment-service
+      dockerfile: Dockerfile
+    container_name: ticketdesk-python-service
+    restart: always
+    environment:
+      ENVIRONMENT: production
+      DATABASE_URL: ${RDS_PYTHON_DATABASE_URL}
+      JWT_SECRET: ${JWT_SECRET}
+      JWT_ISSUER: "ticketdesk-auth-service"
+      JWT_AUDIENCE: "ticketdesk-platform"
+      INTERNAL_SERVICE_KEY: ${INTERNAL_SERVICE_KEY}
+      JAVA_SERVICE_URL: "http://java-ticket-service:8080"
+      STORAGE_PROVIDER: "s3"
+      AWS_REGION: ${AWS_REGION:-us-east-1}
+      S3_BUCKET_NAME: ${S3_ATTACHMENT_BUCKET}
+    expose:
+      - "8082"
+    depends_on:
+      - java-ticket-service
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8082/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+    networks:
+      - ticketdesk-prod-network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: ticketdesk-frontend
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - java-ticket-service
+      - dotnet-comment-service
+      - python-attachment-service
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    networks:
+      - ticketdesk-prod-network
+
+networks:
+  ticketdesk-prod-network:
+    driver: bridge

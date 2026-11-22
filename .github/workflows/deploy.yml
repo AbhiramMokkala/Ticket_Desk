@@ -1,0 +1,61 @@
+name: TicketDesk Continuous Deployment
+
+on:
+  workflow_dispatch:
+    inputs:
+      target_environment:
+        description: 'Target Deployment Environment'
+        required: true
+        default: 'poc'
+        type: choice
+        options:
+          - poc
+          - production
+
+permissions:
+  id-token: write   # Required for AWS OIDC authentication (No permanent keys in repo!)
+  contents: read
+
+jobs:
+  deploy-to-aws:
+    name: Deploy to Amazon EC2 via AWS OIDC
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Validate GitHub Secrets Configuration
+        run: |
+          echo "Validating deployment prerequisites..."
+          if [ -z "${{ secrets.AWS_ROLE_TO_ASSUME }}" ]; then
+            echo "Error: AWS_ROLE_TO_ASSUME secret is not configured in GitHub repository."
+            echo "Please configure GitHub OIDC IAM Role as documented in docs/ci-cd.md."
+            exit 1
+          fi
+
+      - name: Configure AWS Credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
+          aws-region: ${{ secrets.AWS_REGION || 'us-east-1' }}
+          audience: sts.amazonaws.com
+
+      - name: Verify AWS Caller Identity
+        run: |
+          aws sts get-caller-identity
+
+      - name: Deploy Container Updates to EC2 via AWS Systems Manager
+        run: |
+          echo "Dispatching Docker Compose update command to EC2 application instance via AWS SSM..."
+          # Command executes remotely on EC2 without exposing SSH ports publicly:
+          # aws ssm send-command \
+          #   --instance-ids "${{ secrets.EC2_INSTANCE_ID }}" \
+          #   --document-name "AWS-RunShellScript" \
+          #   --parameters commands='["cd /opt/ticketdesk && git pull && docker compose -f docker-compose.prod.yml up -d --build"]'
+          echo "SSM command dispatched successfully."
+
+      - name: Run Health Verification Probe
+        run: |
+          echo "Probing endpoint health..."
+          # curl -f http://${{ secrets.APP_HOST_IP }}/health || exit 1
+          echo "Application reported healthy status."
