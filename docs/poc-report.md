@@ -142,7 +142,7 @@ Detailed in [deployment-guide.md](file:///c:/Users/abhir/OneDrive/RASA_Implement
 ---
 
 ## 20. Git Repository Link
-- Repository URL: `https://github.com/AbhiramMokkala/abhi`
+- Repository URL: `https://github.com/AbhiramMokkala/Ticket_Desk`
 
 ---
 
