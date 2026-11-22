@@ -23,26 +23,26 @@ Rather than a simple classroom CRUD application, TicketDesk demonstrates an indu
 ## 2. Microservice Architecture & Topology
 
 ```mermaid
-graph TD
-    User([Browser Client / React App]) -->|HTTP Port 80| Nginx[Nginx Reverse Proxy Gateway]
+flowchart TD
+    User(["Browser Client (React App)"]) -->|"HTTP Port 80"| Nginx["Nginx Reverse Proxy Gateway"]
 
-    subgraph "Docker Compose / Amazon EC2 Host"
-        Nginx -->|/api/auth/*, /api/tickets/*, /api/dashboard/*, /api/users/*| Java[Java Ticket & Auth Service<br/>Spring Boot 3 â€¢ Port 8080]
-        Nginx -->|/api/tickets/{id}/comments| DotNet[.NET Comment Service<br/>ASP.NET Core 8 â€¢ Port 8081]
-        Nginx -->|/api/tickets/{id}/attachments/*, /api/attachments/*| Python[Python Attachment Service<br/>FastAPI â€¢ Port 8082]
+    subgraph EC2Host ["Docker Compose / Amazon EC2 Host"]
+        Nginx -->|"/api/auth, /api/tickets, /api/dashboard, /api/users"| Java["Java Ticket & Auth Service<br/>Spring Boot 3 (Port 8080)"]
+        Nginx -->|"/api/tickets/:id/comments"| DotNet[".NET Comment Service<br/>ASP.NET Core 8 (Port 8081)"]
+        Nginx -->|"/api/tickets/:id/attachments, /api/attachments"| Python["Python Attachment Service<br/>FastAPI (Port 8082)"]
         
-        DotNet -.->|Internal Auth Verification<br/>X-Internal-Service-Key| Java
-        Python -.->|Internal Auth Verification<br/>X-Internal-Service-Key| Java
+        DotNet -.->|"Internal Auth Verification (X-Internal-Service-Key)"| Java
+        Python -.->|"Internal Auth Verification (X-Internal-Service-Key)"| Java
     end
 
-    subgraph "AWS Managed Cloud Infrastructure"
-        Java -->|JPA / Flyway| RDS[(Amazon RDS PostgreSQL 16<br/>Private Subnets)]
-        DotNet -->|EF Core| RDS
-        Python -->|SQLAlchemy| RDS
+    subgraph CloudInfra ["AWS Managed Cloud Infrastructure"]
+        Java -->|"JPA / Flyway"| RDS[("Amazon RDS PostgreSQL 16<br/>Private Subnets")]
+        DotNet -->|"EF Core"| RDS
+        Python -->|"SQLAlchemy"| RDS
         
-        Python -->|Boto3 Presigned URLs| S3[Amazon S3 Private Attachment Bucket]
-        S3 -->|ObjectCreated Event| Lambda[AWS Lambda File Processor]
-        Lambda -->|Structured Audit Logs| CloudWatch[Amazon CloudWatch Logs]
+        Python -->|"Boto3 Presigned URLs"| S3["Amazon S3 Private Attachment Bucket"]
+        S3 -->|"ObjectCreated Event"| Lambda["AWS Lambda File Processor"]
+        Lambda -->|"Structured Audit Logs"| CloudWatch["Amazon CloudWatch Logs"]
     end
 ```
 
@@ -216,5 +216,6 @@ ticketdesk/
 - **Target Deadline:** 23 November 2026
 - **Project Team:** M Abhiram, M Aditya, R Tarun Teja
 - **Repository URL:** https://github.com/AbhiramMokkala/Ticket_Desk
+
 
 

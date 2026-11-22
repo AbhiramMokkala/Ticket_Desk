@@ -1,4 +1,4 @@
-# TicketDesk — System Architecture & Workflow
+﻿# TicketDesk â€” System Architecture & Workflow
 
 ## 1. System Overview
 
@@ -15,9 +15,9 @@ graph TD
     end
 
     subgraph "Microservices Layer"
-        Java[Java Spring Boot 3 Ticket Service<br/>Port 8080<br/>• Auth & JWT Issuance<br/>• User Roles & RBAC<br/>• Ticket CRUD & Status<br/>• Activity Audit Trail<br/>• Dashboard Analytics]
-        DotNet[.NET 8 ASP.NET Core Comment Service<br/>Port 8081<br/>• Ticket Comments & Threads<br/>• Comment Authorization]
-        Python[Python 3.12 FastAPI Attachment Service<br/>Port 8082<br/>• Attachment Metadata<br/>• Presigned S3 URLs<br/>• MIME & Size Validation]
+        Java[Java Spring Boot 3 Ticket Service<br/>Port 8080<br/>â€¢ Auth & JWT Issuance<br/>â€¢ User Roles & RBAC<br/>â€¢ Ticket CRUD & Status<br/>â€¢ Activity Audit Trail<br/>â€¢ Dashboard Analytics]
+        DotNet[.NET 8 ASP.NET Core Comment Service<br/>Port 8081<br/>â€¢ Ticket Comments & Threads<br/>â€¢ Comment Authorization]
+        Python[Python 3.12 FastAPI Attachment Service<br/>Port 8082<br/>â€¢ Attachment Metadata<br/>â€¢ Presigned S3 URLs<br/>â€¢ MIME & Size Validation]
     end
 
     subgraph "Data & Storage Layer"
@@ -32,8 +32,8 @@ graph TD
 
     Browser -->|HTTP Requests| Nginx
     Nginx -->|/api/auth/*<br/>/api/tickets/*<br/>/api/dashboard/*<br/>/api/users/*| Java
-    Nginx -->|/api/tickets/{id}/comments| DotNet
-    Nginx -->|/api/tickets/{id}/attachments/*<br/>/api/attachments/*| Python
+    Nginx -->|"/api/tickets/:id/comments"| DotNet
+    Nginx -->|"/api/tickets/:id/attachments, /api/attachments"| Python
 
     DotNet -.->|Internal Authorization Check<br/>X-Internal-Service-Key| Java
     Python -.->|Internal Authorization Check<br/>X-Internal-Service-Key| Java
@@ -107,3 +107,4 @@ sequenceDiagram
     Lambda->>S3: head_object (Extract metadata)
     Lambda->>CW: Structured JSON log: TICKET_ATTACHMENT_VERIFIED
 ```
+
