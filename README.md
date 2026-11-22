@@ -1,4 +1,4 @@
-# TicketDesk — Enterprise IT Support Ticket Management Platform
+﻿# TicketDesk â€” Enterprise IT Support Ticket Management Platform
 ### Virtusa AWS Cloud Engineer Level Proof of Concept (POC)
 **Evaluation Submission Deadline:** 23 November 2026  
 **Primary Focus:** AWS Cloud Engineering, Polyglot Microservices (Java 21, .NET 8, Python 3.12), Infrastructure as Code (Terraform), Containerization (Docker), CI/CD (GitHub Actions), and Robust Cloud Security.
@@ -27,9 +27,9 @@ graph TD
     User([Browser Client / React App]) -->|HTTP Port 80| Nginx[Nginx Reverse Proxy Gateway]
 
     subgraph "Docker Compose / Amazon EC2 Host"
-        Nginx -->|/api/auth/*, /api/tickets/*, /api/dashboard/*, /api/users/*| Java[Java Ticket & Auth Service<br/>Spring Boot 3 • Port 8080]
-        Nginx -->|/api/tickets/{id}/comments| DotNet[.NET Comment Service<br/>ASP.NET Core 8 • Port 8081]
-        Nginx -->|/api/tickets/{id}/attachments/*, /api/attachments/*| Python[Python Attachment Service<br/>FastAPI • Port 8082]
+        Nginx -->|/api/auth/*, /api/tickets/*, /api/dashboard/*, /api/users/*| Java[Java Ticket & Auth Service<br/>Spring Boot 3 â€¢ Port 8080]
+        Nginx -->|/api/tickets/{id}/comments| DotNet[.NET Comment Service<br/>ASP.NET Core 8 â€¢ Port 8081]
+        Nginx -->|/api/tickets/{id}/attachments/*, /api/attachments/*| Python[Python Attachment Service<br/>FastAPI â€¢ Port 8082]
         
         DotNet -.->|Internal Auth Verification<br/>X-Internal-Service-Key| Java
         Python -.->|Internal Auth Verification<br/>X-Internal-Service-Key| Java
@@ -76,17 +76,17 @@ graph TD
    - View all support tickets across the company.
    - Filter and search tickets by status, priority, and category.
    - Assign tickets to themselves or other agents.
-   - Transition ticket status (`OPEN` → `IN_PROGRESS` → `RESOLVED` → `CLOSED`).
+   - Transition ticket status (`OPEN` â†’ `IN_PROGRESS` â†’ `RESOLVED` â†’ `CLOSED`).
    - Add comments and review attachments on all tickets.
 3. **Administrator:**
    - Full operational access to all tickets and workflows.
    - Access the **Administration** dashboard with system statistics.
-   - View all registered users and toggle roles (`EMPLOYEE` ↔ `SUPPORT_AGENT`).
+   - View all registered users and toggle roles (`EMPLOYEE` â†” `SUPPORT_AGENT`).
    - Protected: The system enforces that the last Administrator account cannot be demoted.
 
 ---
 
-## 5. Quickstart — Local Development
+## 5. Quickstart â€” Local Development
 
 TicketDesk can run 100% locally using Docker Compose without requiring an AWS account.
 
@@ -179,29 +179,41 @@ cd tests/e2e && npx playwright test
 
 ```
 ticketdesk/
-├── frontend/                  # React 18, TypeScript, Vite, Tailwind CSS, Recharts
-├── backend/
-│   ├── java-ticket-service/   # Java 21, Spring Boot 3, Spring Security, Flyway, JPA
-│   ├── dotnet-comment-service/# ASP.NET Core 8 Web API, EF Core, xUnit
-│   └── python-attachment-service/ # Python 3.12, FastAPI, Boto3, Pytest
-├── aws/
-│   └── lambda/file-processor/ # AWS Lambda S3 event processor
-├── terraform/                 # Modular Terraform (network, security, iam, ec2, rds, s3, lambda, cloudwatch)
-├── nginx/                     # Gateway reverse proxy configuration
-├── tests/
-│   ├── e2e/                   # Playwright end-to-end test scenarios
-│   └── integration/           # Microservice health & auth validation scripts
-├── scripts/                   # Local setup, deploy, verify, and cleanup scripts
-├── docs/                      # Architectural reports, security specs, POC report, and evidence
-├── docker-compose.yml         # Local development configuration (with Postgres)
-├── docker-compose.prod.yml    # Production configuration (connects to Amazon RDS)
-├── Makefile                   # Developer CLI shortcuts
-└── README.md                  # Main project guide
+â”œâ”€â”€ frontend/                  # React 18, TypeScript, Vite, Tailwind CSS, Recharts
+â”œâ”€â”€ backend/
+â”‚   â”œâ”€â”€ java-ticket-service/   # Java 21, Spring Boot 3, Spring Security, Flyway, JPA
+â”‚   â”œâ”€â”€ dotnet-comment-service/# ASP.NET Core 8 Web API, EF Core, xUnit
+â”‚   â””â”€â”€ python-attachment-service/ # Python 3.12, FastAPI, Boto3, Pytest
+â”œâ”€â”€ aws/
+â”‚   â””â”€â”€ lambda/file-processor/ # AWS Lambda S3 event processor
+â”œâ”€â”€ terraform/                 # Modular Terraform (network, security, iam, ec2, rds, s3, lambda, cloudwatch)
+â”œâ”€â”€ nginx/                     # Gateway reverse proxy configuration
+â”œâ”€â”€ tests/
+â”‚   â”œâ”€â”€ e2e/                   # Playwright end-to-end test scenarios
+â”‚   â””â”€â”€ integration/           # Microservice health & auth validation scripts
+â”œâ”€â”€ scripts/                   # Local setup, deploy, verify, and cleanup scripts
+â”œâ”€â”€ docs/                      # Architectural reports, security specs, POC report, and evidence
+â”œâ”€â”€ docker-compose.yml         # Local development configuration (with Postgres)
+â”œâ”€â”€ docker-compose.prod.yml    # Production configuration (connects to Amazon RDS)
+â”œâ”€â”€ Makefile                   # Developer CLI shortcuts
+â””â”€â”€ README.md                  # Main project guide
 ```
 
 ---
 
-## 9. License & Submission Information
+## 9. Team Members & Contribution Mapping (Cloud & DevOps)
+
+| Team Member | Role Title | Evaluation Domain | Specific Modules / AWS Resources Owned | Key Deliverables |
+|---|---|---|---|---|
+| **M Abhiram** | Cloud Infrastructure & Network Architect | AWS Networking, RDS & Terraform Core | 	erraform/modules/network/<br>`terraform/modules/rds/`<br>`terraform/main.tf` | Custom VPC (10.0.0.0/16), Public/Private Subnet routing, Amazon RDS PostgreSQL 16 isolation in private subnets, Zero NAT Gateway cost-optimized architecture, Terraform state & lifecycle management. |
+| **M Aditya** | Cloud Security & DevOps Lead | IAM, Security Groups & CI/CD Pipelines | 	erraform/modules/iam/<br>`terraform/modules/security/`<br>`.github/workflows/` | Least-privilege IAM roles, EC2 IAM Instance Profile, AWS Systems Manager (SSM) keyless management (zero open SSH ports), Security Group traffic isolation, GitHub Actions CI/CD with AWS OIDC authentication. |
+| **R Tarun Teja** | Serverless, Deployment & Observability Lead | S3, Lambda, CloudWatch & EC2 Runtime | 	erraform/modules/s3/<br>`terraform/modules/lambda/`<br>`terraform/modules/cloudwatch/`<br>`terraform/modules/ec2/` | Amazon S3 encrypted/versioned storage, S3 ObjectCreated event-driven AWS Lambda file processor, structured CloudWatch audit logging, operational metrics dashboard (poc-ticketdesk-operations), and EC2 production container orchestration. |
+
+---
+
+## 10. License & Submission Information
 - **Organization:** Virtusa Corporation — Cloud Practice Proof of Concept (POC)
 - **Target Deadline:** 23 November 2026
-- **Author / Engineer:** Virtusa Cloud Engineering Intern Team
+- **Project Team:** M Abhiram, M Aditya, R Tarun Teja
+- **Repository URL:** https://github.com/AbhiramMokkala/Ticket_Desk
+
