@@ -1,4 +1,4 @@
-using System.Text;
+﻿using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -26,7 +26,7 @@ builder.Services.AddScoped<ICommentService, CommentService>();
 
 // Configure JWT Authentication (Matching Java Service JWT Configuration)
 var jwtSecret = builder.Configuration["Jwt:Secret"] 
-    ?? "TicketDeskJwtSecretKeyForVirtusaPOC2026SecureStringMustBe256BitsLong!";
+    ?? "TicketDeskJwtSecretKeyForEnterprisePOC2026SecureStringMustBe256BitsLong!";
 var jwtIssuer = builder.Configuration["Jwt:Issuer"] ?? "ticketdesk-auth-service";
 var jwtAudience = builder.Configuration["Jwt:Audience"] ?? "ticketdesk-platform";
 
@@ -94,3 +94,4 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run("http://0.0.0.0:8081");
+

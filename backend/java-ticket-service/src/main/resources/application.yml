@@ -1,4 +1,4 @@
-spring:
+﻿spring:
   application:
     name: java-ticket-service
   profiles:
@@ -29,10 +29,12 @@ management:
 
 app:
   jwt:
-    secret: ${JWT_SECRET:TicketDeskJwtSecretKeyForVirtusaPOC2026SecureStringMustBe256BitsLong!}
+    secret: ${JWT_SECRET:TicketDeskJwtSecretKeyForEnterprisePOC2026SecureStringMustBe256BitsLong!}
     expiration-hours: ${JWT_EXPIRATION_HOURS:24}
     issuer: ${JWT_ISSUER:ticketdesk-auth-service}
     audience: ${JWT_AUDIENCE:ticketdesk-platform}
   internal:
     secret-key: ${INTERNAL_SERVICE_KEY:TicketDeskInternalServiceAuthSecret2026!}
   seed-demo-data: ${DEMO_DATA_SEED:true}
+
+

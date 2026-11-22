@@ -1,6 +1,6 @@
-# TicketDesk Security Architecture & Best Practices
+﻿# TicketDesk Security Architecture & Best Practices
 
-Security is a primary evaluation category for the Virtusa AWS Engineer POC. TicketDesk implements defense-in-depth across the application, identity, network, and cloud infrastructure layers.
+Security is a primary evaluation category for the Enterprise AWS Engineer POC. TicketDesk implements defense-in-depth across the application, identity, network, and cloud infrastructure layers.
 
 ---
 
@@ -39,3 +39,4 @@ Security is a primary evaluation category for the Virtusa AWS Engineer POC. Tick
 - **Private S3 Storage:** The S3 attachment bucket enables all 4 flags of `aws_s3_bucket_public_access_block`, enables AES256 Server-Side Encryption, and generates short-lived (15 minute) presigned URLs for client uploads and downloads.
 - **Least-Privilege IAM Roles:** EC2 uses an IAM instance profile rather than static AWS Access Keys. Policies are strictly scoped to the specific S3 bucket and CloudWatch log groups.
 - **AWS SSM Session Manager:** Eliminates the need to open SSH port 22 to the public internet for EC2 management.
+

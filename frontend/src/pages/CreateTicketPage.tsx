@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ticketApi, attachmentApi } from '../services/api';
 import { TicketCategory, TicketPriority } from '../types';
@@ -81,7 +81,7 @@ export const CreateTicketPage: React.FC = () => {
         <div>
           <h1 className="text-2xl font-bold tracking-tight text-slate-900">Create Support Ticket</h1>
           <p className="text-xs text-slate-500">
-            Submit a technical request to the Virtusa IT Support Operations team
+            Submit a technical request to the Enterprise IT Support Operations team
           </p>
         </div>
       </div>
@@ -166,10 +166,10 @@ export const CreateTicketPage: React.FC = () => {
                   onChange={(e) => setPriority(e.target.value as TicketPriority)}
                   className="mt-1 block w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
                 >
-                  <option value="LOW">Low — Non-urgent question</option>
-                  <option value="MEDIUM">Medium — General technical problem</option>
-                  <option value="HIGH">High — Impaired productivity</option>
-                  <option value="CRITICAL">Critical — System completely down</option>
+                  <option value="LOW">Low â€” Non-urgent question</option>
+                  <option value="MEDIUM">Medium â€” General technical problem</option>
+                  <option value="HIGH">High â€” Impaired productivity</option>
+                  <option value="CRITICAL">Critical â€” System completely down</option>
                 </select>
               </div>
             </div>
@@ -242,3 +242,4 @@ export const CreateTicketPage: React.FC = () => {
     </div>
   );
 };
+

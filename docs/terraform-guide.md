@@ -1,6 +1,6 @@
-# Terraform Infrastructure Guide
+﻿# Terraform Infrastructure Guide
 
-The TicketDesk Terraform codebase automates 100% of the AWS cloud infrastructure required for the Virtusa POC.
+The TicketDesk Terraform codebase automates 100% of the AWS cloud infrastructure required for the Cloud POC.
 
 ---
 
@@ -8,22 +8,22 @@ The TicketDesk Terraform codebase automates 100% of the AWS cloud infrastructure
 
 ```
 terraform/
-├── main.tf                    # Root composition module
-├── variables.tf               # Input variable declarations
-├── outputs.tf                 # Output values (IPs, URLs, Arns)
-├── providers.tf               # AWS Provider with default resource tags
-├── versions.tf                # Required versions (Terraform >= 1.5, AWS >= 5.50)
-├── terraform.tfvars.example   # Example variables file
-├── backend.tf.example         # Optional S3 remote backend template
-└── modules/
-    ├── network/               # VPC, Public Subnet, Private DB Subnets, IGW, Route Tables
-    ├── security/              # EC2 SG (80, 443), RDS SG (5432 from EC2 strictly)
-    ├── iam/                   # EC2 Instance Profile (SSM, S3, CloudWatch), Lambda Role
-    ├── ec2/                   # Amazon Linux 2023, Docker & Compose user_data, encrypted EBS
-    ├── rds/                   # Amazon RDS PostgreSQL 16, multi_az=false, storage_encrypted=true
-    ├── s3/                    # Private Attachment Bucket, Public Access Block, SSE, CORS
-    ├── lambda/                # Python 3.12 File Processor, archive_file, S3 Event Trigger
-    └── cloudwatch/            # Log Groups (/ticketdesk/app), Metrics Dashboard
+â”œâ”€â”€ main.tf                    # Root composition module
+â”œâ”€â”€ variables.tf               # Input variable declarations
+â”œâ”€â”€ outputs.tf                 # Output values (IPs, URLs, Arns)
+â”œâ”€â”€ providers.tf               # AWS Provider with default resource tags
+â”œâ”€â”€ versions.tf                # Required versions (Terraform >= 1.5, AWS >= 5.50)
+â”œâ”€â”€ terraform.tfvars.example   # Example variables file
+â”œâ”€â”€ backend.tf.example         # Optional S3 remote backend template
+â””â”€â”€ modules/
+    â”œâ”€â”€ network/               # VPC, Public Subnet, Private DB Subnets, IGW, Route Tables
+    â”œâ”€â”€ security/              # EC2 SG (80, 443), RDS SG (5432 from EC2 strictly)
+    â”œâ”€â”€ iam/                   # EC2 Instance Profile (SSM, S3, CloudWatch), Lambda Role
+    â”œâ”€â”€ ec2/                   # Amazon Linux 2023, Docker & Compose user_data, encrypted EBS
+    â”œâ”€â”€ rds/                   # Amazon RDS PostgreSQL 16, multi_az=false, storage_encrypted=true
+    â”œâ”€â”€ s3/                    # Private Attachment Bucket, Public Access Block, SSE, CORS
+    â”œâ”€â”€ lambda/                # Python 3.12 File Processor, archive_file, S3 Event Trigger
+    â””â”€â”€ cloudwatch/            # Log Groups (/ticketdesk/app), Metrics Dashboard
 ```
 
 ---
@@ -64,3 +64,4 @@ terraform destroy
 
 > [!IMPORTANT]
 > `terraform destroy` is fully supported and automated. The S3 module uses `force_destroy = true` and the RDS module uses `skip_final_snapshot = true` to allow complete, clean removal of all resources with zero orphaned resources.
+

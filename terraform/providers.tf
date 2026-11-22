@@ -1,4 +1,4 @@
-provider "aws" {
+﻿provider "aws" {
   region = var.aws_region
 
   default_tags {
@@ -6,7 +6,8 @@ provider "aws" {
       Project     = "TicketDesk"
       Environment = var.environment
       ManagedBy   = "Terraform"
-      Owner       = "Virtusa-POC"
+      Owner       = "Enterprise-POC"
     }
   }
 }
+

@@ -1,6 +1,6 @@
 ﻿# Individual Contribution Mapping (Cloud & DevOps Focus)
 
-This document provides the official team member contribution matrix for the Virtusa AWS Cloud Engineer evaluation panel.
+This document provides the official team member contribution matrix for the Enterprise AWS Cloud Engineer evaluation panel.
 
 | Team Member | Role Title | Evaluation Domain | Specific Modules / AWS Resources Owned | Key Deliverables & Responsibilities |
 |---|---|---|---|---|
@@ -30,3 +30,4 @@ etwork, ds).
   - Implemented event-driven file processing pipeline triggered by S3 ObjectCreated events.
   - AWS Lambda function validates attachment integrity (MIME, <10MB) and records structured audit events.
   - Constructed CloudWatch operational dashboard monitoring EC2 CPU utilization, RDS database connections, and Lambda invocations.
+

@@ -1,4 +1,4 @@
-import os
+﻿import os
 from typing import Optional
 
 try:
@@ -12,7 +12,7 @@ try:
         DATABASE_URL: str = "postgresql://ticketdesk_user:ticketdesk_secure_password_2026@postgres:5432/ticketdesk_db"
 
         # Security & Auth
-        JWT_SECRET: str = "TicketDeskJwtSecretKeyForVirtusaPOC2026SecureStringMustBe256BitsLong!"
+        JWT_SECRET: str = "TicketDeskJwtSecretKeyForEnterprisePOC2026SecureStringMustBe256BitsLong!"
         JWT_ALGORITHM: str = "HS512"
         JWT_ISSUER: str = "ticketdesk-auth-service"
         JWT_AUDIENCE: str = "ticketdesk-platform"
@@ -49,7 +49,7 @@ except ImportError:
         ENVIRONMENT = os.environ.get("ENVIRONMENT", "development")
         LOG_LEVEL = os.environ.get("LOG_LEVEL", "INFO")
         DATABASE_URL = os.environ.get("DATABASE_URL", "postgresql://ticketdesk_user:ticketdesk_secure_password_2026@postgres:5432/ticketdesk_db")
-        JWT_SECRET = os.environ.get("JWT_SECRET", "TicketDeskJwtSecretKeyForVirtusaPOC2026SecureStringMustBe256BitsLong!")
+        JWT_SECRET = os.environ.get("JWT_SECRET", "TicketDeskJwtSecretKeyForEnterprisePOC2026SecureStringMustBe256BitsLong!")
         JWT_ALGORITHM = os.environ.get("JWT_ALGORITHM", "HS256")
         JWT_ISSUER = os.environ.get("JWT_ISSUER", "ticketdesk-auth-service")
         JWT_AUDIENCE = os.environ.get("JWT_AUDIENCE", "ticketdesk-platform")
@@ -67,3 +67,4 @@ except ImportError:
         ]
 
     settings = FallbackSettings()
+

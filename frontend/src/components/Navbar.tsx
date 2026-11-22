@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { RoleBadge } from './StatusBadge';
 import { Bell, ShieldCheck, User as UserIcon } from 'lucide-react';
@@ -12,7 +12,7 @@ export const Navbar: React.FC = () => {
       <div className="flex items-center gap-3">
         <span className="flex items-center gap-1.5 rounded-md bg-blue-50 px-2.5 py-1 text-xs font-medium text-blue-700">
           <ShieldCheck className="h-3.5 w-3.5 text-blue-600" />
-          Virtusa AWS Engineer POC
+          AWS Cloud Engineer POC
         </span>
       </div>
 
@@ -41,3 +41,4 @@ export const Navbar: React.FC = () => {
     </header>
   );
 };
+

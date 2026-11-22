@@ -1,4 +1,4 @@
-services:
+﻿services:
   postgres:
     image: postgres:16-alpine
     container_name: ticketdesk-postgres
@@ -30,7 +30,7 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/ticketdesk_db
       SPRING_DATASOURCE_USERNAME: ticketdesk_user
       SPRING_DATASOURCE_PASSWORD: ticketdesk_secure_password_2026
-      JWT_SECRET: TicketDeskJwtSecretKeyForVirtusaPOC2026SecureStringMustBe256BitsLong!
+      JWT_SECRET: TicketDeskJwtSecretKeyForEnterprisePOC2026SecureStringMustBe256BitsLong!
       JWT_EXPIRATION_HOURS: 24
       INTERNAL_SERVICE_KEY: TicketDeskInternalServiceAuthSecret2026!
       DEMO_DATA_SEED: "true"
@@ -57,7 +57,7 @@ services:
     environment:
       ASPNETCORE_ENVIRONMENT: Development
       ConnectionStrings__DefaultConnection: "Host=postgres;Port=5432;Database=ticketdesk_db;Username=ticketdesk_user;Password=ticketdesk_secure_password_2026"
-      Jwt__Secret: "TicketDeskJwtSecretKeyForVirtusaPOC2026SecureStringMustBe256BitsLong!"
+      Jwt__Secret: "TicketDeskJwtSecretKeyForEnterprisePOC2026SecureStringMustBe256BitsLong!"
       Jwt__Issuer: "ticketdesk-auth-service"
       Jwt__Audience: "ticketdesk-platform"
       InternalAuth__SecretKey: "TicketDeskInternalServiceAuthSecret2026!"
@@ -87,7 +87,7 @@ services:
     environment:
       ENVIRONMENT: development
       DATABASE_URL: "postgresql://ticketdesk_user:ticketdesk_secure_password_2026@postgres:5432/ticketdesk_db"
-      JWT_SECRET: "TicketDeskJwtSecretKeyForVirtusaPOC2026SecureStringMustBe256BitsLong!"
+      JWT_SECRET: "TicketDeskJwtSecretKeyForEnterprisePOC2026SecureStringMustBe256BitsLong!"
       JWT_ISSUER: "ticketdesk-auth-service"
       JWT_AUDIENCE: "ticketdesk-platform"
       INTERNAL_SERVICE_KEY: "TicketDeskInternalServiceAuthSecret2026!"
@@ -141,3 +141,4 @@ volumes:
 networks:
   ticketdesk-network:
     driver: bridge
+

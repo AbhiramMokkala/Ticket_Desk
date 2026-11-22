@@ -1,10 +1,10 @@
-# Virtusa AWS Engineer POC Evaluation Report
-## Project TicketDesk — IT Support Ticket Platform
+﻿# Enterprise AWS Engineer POC Evaluation Report
+## Project TicketDesk â€” IT Support Ticket Platform
 
 **Submission Deadline:** 23 November 2026  
 **Evaluation Level:** AWS Cloud Engineer / DevOps Intern  
 **Project Name:** TicketDesk  
-**Status:** ✅ FULLY DEPLOYED & AWS VERIFIED  
+**Status:** âœ… FULLY DEPLOYED & AWS VERIFIED  
 **Live Application URL:** http://13.221.172.233  
 **Last Verified:** 22 November 2026
 
@@ -33,7 +33,7 @@ Refer to detailed Mermaid diagrams in [architecture.md](file:///c:/Users/abhir/O
 
 ## 4. Application Flow & Workflows
 - **Authentication:** Java Spring Boot validates credentials and issues JWT tokens.
-- **Ticket CRUD:** Employees submit tickets (`OPEN`); Agents manage workflows (`OPEN` → `IN_PROGRESS` → `RESOLVED` → `CLOSED`).
+- **Ticket CRUD:** Employees submit tickets (`OPEN`); Agents manage workflows (`OPEN` â†’ `IN_PROGRESS` â†’ `RESOLVED` â†’ `CLOSED`).
 - **Comments Thread:** Handled by .NET 8 Web API with cross-service authorization.
 - **Attachments:** Managed by Python FastAPI with S3 presigned URLs.
 
@@ -148,3 +148,4 @@ Detailed in [deployment-guide.md](file:///c:/Users/abhir/OneDrive/RASA_Implement
 
 ## 21. Individual Contribution Mapping
 Detailed in [individual-contributions.md](file:///c:/Users/abhir/OneDrive/RASA_Implementation/ticketdesk/docs/individual-contributions.md).
+

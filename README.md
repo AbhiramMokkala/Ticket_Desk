@@ -1,5 +1,5 @@
 ﻿# TicketDesk â€” Enterprise IT Support Ticket Management Platform
-### Virtusa AWS Cloud Engineer Level Proof of Concept (POC)
+### Enterprise AWS Cloud Engineer Proof of Concept (POC)
 **Evaluation Submission Deadline:** 23 November 2026  
 **Primary Focus:** AWS Cloud Engineering, Polyglot Microservices (Java 21, .NET 8, Python 3.12), Infrastructure as Code (Terraform), Containerization (Docker), CI/CD (GitHub Actions), and Robust Cloud Security.
 
@@ -212,8 +212,9 @@ ticketdesk/
 ---
 
 ## 10. License & Submission Information
-- **Organization:** Virtusa Corporation — Cloud Practice Proof of Concept (POC)
+- **Organization:** Enterprise Cloud Practice — Proof of Concept (POC)
 - **Target Deadline:** 23 November 2026
 - **Project Team:** M Abhiram, M Aditya, R Tarun Teja
 - **Repository URL:** https://github.com/AbhiramMokkala/Ticket_Desk
+
 

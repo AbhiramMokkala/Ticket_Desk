@@ -1,4 +1,4 @@
-# Example Terraform Variable Configuration for Virtusa POC
+﻿# Example Terraform Variable Configuration for Enterprise POC
 # Copy this file to terraform.tfvars and populate with your secure credentials
 
 aws_region           = "us-east-1"
@@ -9,11 +9,12 @@ ec2_instance_type    = "t3.small"
 # Database Configuration
 db_name              = "ticketdesk_db"
 db_username          = "ticketdesk_admin"
-db_password          = "VirtusaP0C_SecurePass2026!" # Replace with strong password
+db_password          = "TicketDesk_SecurePass2026!" # Replace with strong password
 
 # Microservice Security Keys
-jwt_secret           = "TicketDeskJwtSecretKeyForVirtusaPOC2026SecureStringMustBe256BitsLong!"
+jwt_secret           = "TicketDeskJwtSecretKeyForEnterprisePOC2026SecureStringMustBe256BitsLong!"
 internal_service_key = "TicketDeskInternalServiceAuthSecret2026!"
 
 # Optional: Restrict HTTP/SSH ingress to your personal IP: ["203.0.113.50/32"]
 allowed_admin_cidrs  = ["0.0.0.0/0"]
+

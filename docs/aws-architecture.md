@@ -1,8 +1,8 @@
-# AWS Cloud Architecture & Infrastructure Design
+﻿# AWS Cloud Architecture & Infrastructure Design
 
 ## 1. Cloud Architecture Overview
 
-The TicketDesk AWS cloud architecture is engineered to satisfy the Virtusa Cloud Engineer Level Proof of Concept requirements with strict adherence to **Cost Optimization**, **Security**, and **Reliability**.
+The TicketDesk AWS cloud architecture is engineered to satisfy the Enterprise Cloud Engineer Level Proof of Concept requirements with strict adherence to **Cost Optimization**, **Security**, and **Reliability**.
 
 ```mermaid
 graph TD
@@ -10,7 +10,7 @@ graph TD
 
     subgraph "VPC: 10.0.0.0/16"
         subgraph "Public Subnet: 10.0.1.0/24 (AZ: us-east-1a)"
-            IGW --> EC2[Amazon EC2 Instance<br/>t3.small • Amazon Linux 2023<br/>Docker Compose Host<br/>Nginx, Java, .NET, Python]
+            IGW --> EC2[Amazon EC2 Instance<br/>t3.small â€¢ Amazon Linux 2023<br/>Docker Compose Host<br/>Nginx, Java, .NET, Python]
             EBS[(Encrypted EBS gp3<br/>30 GB Root Volume)]
             EC2 --- EBS
         end
@@ -26,7 +26,7 @@ graph TD
     end
 
     subgraph "AWS Managed Platform Services"
-        EC2 -->|IAM Role: S3 Read/Write| S3[(Amazon S3 Private Attachment Bucket<br/>Public Access Block • SSE-S3)]
+        EC2 -->|IAM Role: S3 Read/Write| S3[(Amazon S3 Private Attachment Bucket<br/>Public Access Block â€¢ SSE-S3)]
         S3 -->|s3:ObjectCreated:*| Lambda[AWS Lambda File Processor<br/>Python 3.12]
         EC2 -->|IAM Role: CloudWatch Agent| CW[Amazon CloudWatch<br/>Logs & Operational Dashboard]
         Lambda -->|Execution Role| CW
@@ -60,3 +60,4 @@ graph TD
    Avoids multi-AZ standby replication costs during the evaluation phase.
 4. **Automated Clean Teardown:**  
    The Terraform configuration includes `force_destroy = true` on S3 and `skip_final_snapshot = true` on RDS so `terraform destroy` executes cleanly in one command.
+

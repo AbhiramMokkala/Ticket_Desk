@@ -1,15 +1,16 @@
-# Example Remote S3 Backend Configuration with DynamoDB State Locking
+﻿# Example Remote S3 Backend Configuration with DynamoDB State Locking
 # To use:
-# 1. Create an S3 bucket (e.g., ticketdesk-tfstate-virtusa-poc)
+# 1. Create an S3 bucket (e.g., ticketdesk-tfstate-enterprise-poc)
 # 2. Create a DynamoDB table with partition key 'LockID' (e.g., ticketdesk-tflocks)
 # 3. Rename this file to backend.tf and run: terraform init -migrate-state
 
 # terraform {
 #   backend "s3" {
-#     bucket         = "ticketdesk-tfstate-virtusa-poc"
+#     bucket         = "ticketdesk-tfstate-enterprise-poc"
 #     key            = "poc/ticketdesk.tfstate"
 #     region         = "us-east-1"
 #     encrypt        = true
 #     dynamodb_table = "ticketdesk-tflocks"
 #   }
 # }
+

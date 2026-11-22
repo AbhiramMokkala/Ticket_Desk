@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { Layers, Eye, EyeOff, AlertCircle, ShieldCheck } from 'lucide-react';
@@ -88,7 +88,7 @@ export const LoginPage: React.FC = () => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   className="block w-full rounded-lg border border-slate-300 px-3 py-2 pr-10 text-sm text-slate-900 placeholder-slate-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
-                  placeholder="••••••••"
+                  placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢"
                 />
                 <button
                   type="button"
@@ -109,7 +109,7 @@ export const LoginPage: React.FC = () => {
             </button>
           </form>
 
-          {/* Quick Demo Login Preset Buttons for Virtusa Evaluator */}
+          {/* Quick Demo Login Preset Buttons for POC Evaluator */}
           <div className="mt-6 border-t border-slate-200 pt-5">
             <span className="block text-center text-xs font-semibold uppercase tracking-wider text-slate-500">
               Evaluation Demo Accounts
@@ -150,3 +150,4 @@ export const LoginPage: React.FC = () => {
     </div>
   );
 };
+
