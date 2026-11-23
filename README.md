@@ -1,4 +1,4 @@
-﻿# TicketDesk â€” Enterprise IT Support Ticket Management Platform
+# TicketDesk â€” Enterprise IT Support Ticket Management Platform
 ### Enterprise AWS Cloud Engineer Proof of Concept (POC)
 **Evaluation Submission Deadline:** 23 November 2026  
 **Primary Focus:** AWS Cloud Engineering, Polyglot Microservices (Java 21, .NET 8, Python 3.12), Infrastructure as Code (Terraform), Containerization (Docker), CI/CD (GitHub Actions), and Robust Cloud Security.

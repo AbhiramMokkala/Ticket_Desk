@@ -1,4 +1,4 @@
-﻿package com.ticketdesk.dto;
+package com.ticketdesk.dto;
 
 import com.ticketdesk.model.Role;
 import jakarta.validation.constraints.NotNull;

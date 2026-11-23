@@ -1,4 +1,4 @@
-﻿package com.ticketdesk.exception;
+package com.ticketdesk.exception;
 
 public class ResourceNotFoundException extends RuntimeException {
     public ResourceNotFoundException(String message) {

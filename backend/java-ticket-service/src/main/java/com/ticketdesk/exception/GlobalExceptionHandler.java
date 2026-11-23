@@ -1,4 +1,4 @@
-﻿package com.ticketdesk.exception;
+package com.ticketdesk.exception;
 
 import com.ticketdesk.dto.ApiResponse;
 import org.springframework.http.HttpStatus;

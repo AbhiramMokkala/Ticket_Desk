@@ -1,4 +1,4 @@
-﻿package com.ticketdesk.controller;
+package com.ticketdesk.controller;
 
 import com.ticketdesk.dto.ApiResponse;
 import com.ticketdesk.dto.TicketRequests;

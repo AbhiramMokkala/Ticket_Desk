@@ -1,4 +1,4 @@
-﻿package com.ticketdesk.service;
+package com.ticketdesk.service;
 
 import com.ticketdesk.dto.UserManagementDto;
 import com.ticketdesk.exception.BadRequestException;

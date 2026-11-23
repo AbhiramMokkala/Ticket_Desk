@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ticketApi, attachmentApi } from '../services/api';
 import { TicketCategory, TicketPriority } from '../types';

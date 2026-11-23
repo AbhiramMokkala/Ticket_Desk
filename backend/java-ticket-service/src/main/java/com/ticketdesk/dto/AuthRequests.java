@@ -1,4 +1,4 @@
-﻿package com.ticketdesk.dto;
+package com.ticketdesk.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

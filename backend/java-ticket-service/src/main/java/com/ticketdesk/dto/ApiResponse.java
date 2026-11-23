@@ -1,4 +1,4 @@
-﻿package com.ticketdesk.dto;
+package com.ticketdesk.dto;
 
 import java.time.OffsetDateTime;
 

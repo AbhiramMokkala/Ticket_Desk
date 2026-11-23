@@ -1,4 +1,4 @@
-﻿# Individual Contribution Mapping (Cloud & DevOps Focus)
+# Individual Contribution Mapping (Cloud & DevOps Focus)
 
 This document provides the official team member contribution matrix for the Enterprise AWS Cloud Engineer evaluation panel.
 

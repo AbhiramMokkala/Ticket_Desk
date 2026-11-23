@@ -1,4 +1,4 @@
-﻿package com.ticketdesk;
+package com.ticketdesk;
 
 import com.ticketdesk.dto.AuthRequests;
 import com.ticketdesk.dto.AuthResponses;

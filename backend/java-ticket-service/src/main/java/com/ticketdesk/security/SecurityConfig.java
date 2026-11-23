@@ -1,4 +1,4 @@
-﻿package com.ticketdesk.security;
+package com.ticketdesk.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

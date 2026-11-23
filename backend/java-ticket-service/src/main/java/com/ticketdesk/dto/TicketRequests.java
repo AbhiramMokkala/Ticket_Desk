@@ -1,4 +1,4 @@
-﻿package com.ticketdesk.dto;
+package com.ticketdesk.dto;
 
 import com.ticketdesk.model.TicketCategory;
 import com.ticketdesk.model.TicketPriority;

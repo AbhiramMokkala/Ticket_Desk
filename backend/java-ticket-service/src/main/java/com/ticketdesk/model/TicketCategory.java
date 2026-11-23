@@ -1,4 +1,4 @@
-﻿package com.ticketdesk.model;
+package com.ticketdesk.model;
 
 public enum TicketCategory {
     HARDWARE,

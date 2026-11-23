@@ -1,4 +1,4 @@
-﻿# Enterprise AWS Engineer POC Evaluation Report
+# Enterprise AWS Engineer POC Evaluation Report
 ## Project TicketDesk â€” IT Support Ticket Platform
 
 **Submission Deadline:** 23 November 2026  

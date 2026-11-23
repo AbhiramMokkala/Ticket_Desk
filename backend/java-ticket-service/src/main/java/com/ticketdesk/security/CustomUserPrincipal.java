@@ -1,4 +1,4 @@
-﻿package com.ticketdesk.security;
+package com.ticketdesk.security;
 
 import com.ticketdesk.model.Role;
 import com.ticketdesk.model.User;

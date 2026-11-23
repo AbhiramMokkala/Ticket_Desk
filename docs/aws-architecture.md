@@ -1,4 +1,4 @@
-﻿# AWS Cloud Architecture & Infrastructure Design
+# AWS Cloud Architecture & Infrastructure Design
 
 ## 1. Cloud Architecture Overview
 

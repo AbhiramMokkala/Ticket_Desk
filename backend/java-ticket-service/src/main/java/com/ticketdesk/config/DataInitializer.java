@@ -1,4 +1,4 @@
-﻿package com.ticketdesk.config;
+package com.ticketdesk.config;
 
 import com.ticketdesk.model.*;
 import com.ticketdesk.repository.TicketActivityRepository;

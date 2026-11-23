@@ -1,4 +1,4 @@
-﻿# TicketDesk â€” System Architecture & Workflow
+# TicketDesk â€” System Architecture & Workflow
 
 ## 1. System Overview
 

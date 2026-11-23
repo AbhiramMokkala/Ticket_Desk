@@ -1,4 +1,4 @@
-﻿package com.ticketdesk;
+package com.ticketdesk;
 
 import com.ticketdesk.dto.TicketResponses;
 import com.ticketdesk.model.Role;

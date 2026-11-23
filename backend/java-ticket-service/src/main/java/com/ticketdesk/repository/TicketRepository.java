@@ -1,4 +1,4 @@
-﻿package com.ticketdesk.repository;
+package com.ticketdesk.repository;
 
 import com.ticketdesk.model.Ticket;
 import com.ticketdesk.model.TicketPriority;

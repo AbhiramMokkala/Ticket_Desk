@@ -1,4 +1,4 @@
-﻿package com.ticketdesk.model;
+package com.ticketdesk.model;
 
 import jakarta.persistence.*;
 import java.time.OffsetDateTime;

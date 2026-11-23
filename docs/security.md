@@ -1,4 +1,4 @@
-﻿# TicketDesk Security Architecture & Best Practices
+# TicketDesk Security Architecture & Best Practices
 
 Security is a primary evaluation category for the Enterprise AWS Engineer POC. TicketDesk implements defense-in-depth across the application, identity, network, and cloud infrastructure layers.
 

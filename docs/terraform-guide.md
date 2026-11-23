@@ -1,4 +1,4 @@
-﻿# Terraform Infrastructure Guide
+# Terraform Infrastructure Guide
 
 The TicketDesk Terraform codebase automates 100% of the AWS cloud infrastructure required for the Cloud POC.
 

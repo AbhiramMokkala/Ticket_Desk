@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { RoleBadge } from './StatusBadge';
 import { Bell, ShieldCheck, User as UserIcon } from 'lucide-react';

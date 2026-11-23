@@ -1,4 +1,4 @@
-﻿package com.ticketdesk.controller;
+package com.ticketdesk.controller;
 
 import com.ticketdesk.dto.InternalAuthResponse;
 import com.ticketdesk.model.Role;
